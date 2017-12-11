@@ -35,8 +35,6 @@ public class Test extends Application {
 	}
 
 	public static void main(String argv[]) {
-		System.out.println("Begin");
 		launch(argv);
-		System.out.println("End");
 	}
 }
