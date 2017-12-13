@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class DownloadBar extends BorderPane {
@@ -19,6 +20,9 @@ public class DownloadBar extends BorderPane {
 	private Downloader downloader;
 	private Label label;
 	private Button BoutonRemove;
+	private Button BoutonPause;
+	private HBox boutons;
+	private boolean estEnPause;
 
 	public DownloadBar(String url) {
 
@@ -28,6 +32,8 @@ public class DownloadBar extends BorderPane {
 			throw new RuntimeException(e);
 		}
 		
+		estEnPause = false;
+		
 		this.barre = new ProgressBar();
 		barre.setPrefWidth(Double.MAX_VALUE);
 		this.setCenter(barre);
@@ -36,13 +42,31 @@ public class DownloadBar extends BorderPane {
 		setTop(label);
 		
 		BoutonRemove = new Button("X");
-		setRight(BoutonRemove);
 		BoutonRemove.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				VBox parent = (VBox) DownloadBar.this.getParent();
 				parent.getChildren().remove(DownloadBar.this);
 			}	
 		});
+		
+		BoutonPause = new Button("Pause");
+		BoutonPause.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				if(estEnPause){
+					BoutonPause.setText("Start");
+					downloader.pause();
+					estEnPause = false;
+				} else {
+					BoutonPause.setText("Pause");
+					downloader.play();
+					estEnPause = true;
+				}
+				
+			}	
+		});
+		
+		boutons = new HBox(BoutonPause,BoutonRemove);
+		setRight(boutons);
 
 		new Thread(new Runnable() {
 			public void run() {
@@ -62,6 +86,9 @@ public class DownloadBar extends BorderPane {
 		downloader.progressProperty().addListener((obs, o, n) -> {
 			Platform.runLater(() -> {
 				barre.setProgress((double) n);
+				if((double) n == 1.0){
+					boutons.getChildren().remove(BoutonPause);
+				}
 			});
 		});
 

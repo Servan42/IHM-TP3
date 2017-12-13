@@ -95,11 +95,15 @@ public class Downloader extends Task {
 		return filename;
 	}
 	
-	public void play(){
-		
+	public synchronized void play(){
+		notifyAll();
 	}
 	
-	public void pause(){
-		
+	public synchronized void pause(){
+		try {
+			wait();
+		} catch (InterruptedException e) {
+			System.out.println(e.toString());
+		}
 	}
 };

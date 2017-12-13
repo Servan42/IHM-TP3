@@ -28,13 +28,13 @@ public class Main extends Application {
 		BorderPane bottom = new BorderPane();
 		Button BoutonAdd = new Button("Add");
 		TextField text = new TextField();
-		text.setPromptText("Enter a URL");
+		text.setPromptText("Enter an URL");
 		bottom.setCenter(text);
 		bottom.setRight(BoutonAdd);
 		global.setBottom(bottom);
 
 		global.setPrefWidth(600);
-		global.setPrefHeight(600);
+		global.setPrefHeight(300);
 		stage.setScene(new Scene(global));
 		stage.setTitle("Downloader");
 		stage.show();
