@@ -94,4 +94,12 @@ public class Downloader extends Task {
 		}
 		return filename;
 	}
+	
+	public void play(){
+		
+	}
+	
+	public void pause(){
+		
+	}
 };
