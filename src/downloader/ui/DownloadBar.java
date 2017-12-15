@@ -50,6 +50,7 @@ public class DownloadBar extends BorderPane {
 		});
 		
 		BoutonPause = new Button("Pause");
+		BoutonPause.setMinWidth(60);
 		BoutonPause.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				if(estEnPause){
