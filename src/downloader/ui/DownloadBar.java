@@ -50,15 +50,16 @@ public class DownloadBar extends BorderPane {
 		});
 		
 		BoutonPause = new Button("Pause");
+		BoutonPause.setPrefWidth(100);
 		BoutonPause.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				if(estEnPause){
-					BoutonPause.setText("Start");
-					downloader.pause();
-					estEnPause = false;
-				} else {
 					BoutonPause.setText("Pause");
 					downloader.play();
+					estEnPause = false;
+				} else {
+					BoutonPause.setText("Start");
+					downloader.pause();
 					estEnPause = true;
 				}
 				
@@ -87,7 +88,8 @@ public class DownloadBar extends BorderPane {
 			Platform.runLater(() -> {
 				barre.setProgress((double) n);
 				if((double) n == 1.0){
-					boutons.getChildren().remove(BoutonPause);
+//					boutons.getChildren().remove(BoutonPause);
+					BoutonPause.setDisable(true);
 				}
 			});
 		});
