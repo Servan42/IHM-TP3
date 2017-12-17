@@ -65,7 +65,7 @@ public class Downloader extends Task {
 	protected String download() throws InterruptedException {
 		byte buffer[] = new byte[CHUNK_SIZE];
 
-		while (count >= 0 /* || !dl */) {
+		while (count >= 0) {
 			lock.lock();
 			try {
 				while (!dl)
@@ -115,14 +115,6 @@ public class Downloader extends Task {
 	}
 
 	public void play() {
-		// notifyAll();
-		// try {
-		// lock.tryLock();
-		// dl = true;
-		// System.out.println("PLOP");
-		// } finally {
-		// lock.unlock();
-		// }
 		lock.lock();
 		try {
 			dl = true;
@@ -133,20 +125,6 @@ public class Downloader extends Task {
 	}
 
 	public void pause() {
-		// try {
-		// wait();
-		// } catch (InterruptedException e) {
-		// System.out.println(e.toString());
-		// }
-		// try {
-		// lock.lock();
-		// dl = false;
-		// System.out.println("PLIP");
-		// } catch(Exception e) {
-		// System.out.println("Hola ! " + e.toString());
-		// } finally {
-		// lock.unlock();
-		// }
 		lock.lock();
 		try {
 			dl = false;
