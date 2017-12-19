@@ -46,6 +46,8 @@ public class DownloadBar extends BorderPane {
 			public void handle(ActionEvent e) {
 				VBox parent = (VBox) DownloadBar.this.getParent();
 				parent.getChildren().remove(DownloadBar.this);
+				downloader.setStopDL();
+				downloader.play();
 			}	
 		});
 		

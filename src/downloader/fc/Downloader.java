@@ -20,6 +20,7 @@ public class Downloader extends Task {
 
 	private ReentrantLock lock;
 	private Condition pause;
+	private boolean stopDL;
 
 	URL url;
 	int content_length;
@@ -36,6 +37,7 @@ public class Downloader extends Task {
 	private boolean dl;
 
 	public Downloader(String uri) {
+		stopDL = false;
 		try {
 			url = new URL(uri);
 
@@ -65,7 +67,7 @@ public class Downloader extends Task {
 	protected String download() throws InterruptedException {
 		byte buffer[] = new byte[CHUNK_SIZE];
 
-		while (count >= 0) {
+		while (count >= 0 && !stopDL) {
 			lock.lock();
 			try {
 				while (!dl)
@@ -91,12 +93,14 @@ public class Downloader extends Task {
 			System.out.println();
 		}
 
-		if (size < content_length) {
+		if (size < content_length || stopDL) {
 			temp.delete();
+			System.out.println("Download Interrupted");
 			throw new InterruptedException();
 		}
 
 		temp.renameTo(new File(filename));
+		System.out.println("Download Complete");
 		return filename;
 	}
 
@@ -131,5 +135,9 @@ public class Downloader extends Task {
 		} finally {
 			lock.unlock();
 		}
+	}
+	
+	public void setStopDL(){
+		stopDL = true;
 	}
 };
