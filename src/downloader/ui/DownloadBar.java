@@ -8,7 +8,9 @@ import downloader.fc.Downloader;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
@@ -29,6 +31,7 @@ public class DownloadBar extends BorderPane {
 		try {
 			new URL(url);
 		} catch (MalformedURLException e) {
+			new Alert(Alert.AlertType.ERROR, "Incorrect URL.", ButtonType.CLOSE).showAndWait();
 			throw new RuntimeException(e);
 		}
 		
@@ -96,13 +99,11 @@ public class DownloadBar extends BorderPane {
 			});
 		});
 
-		String filename = downloader.getFilename();
 		try {
 			downloader.run();
 		} catch (Exception e) {
 			System.err.println("failed!");
 		}
-		System.out.format("into %s/%s\n", Paths.get(".").toAbsolutePath().normalize().toString(), filename);
 
 	}
 

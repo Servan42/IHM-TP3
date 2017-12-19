@@ -2,6 +2,7 @@ package downloader.fc;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Paths;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 import java.net.MalformedURLException;
@@ -87,10 +88,11 @@ public class Downloader extends Task {
 				} catch (IOException e) {
 					continue;
 				}
+				
 			} finally {
 				lock.unlock();
 			}
-			System.out.println();
+			System.out.print(".");
 		}
 
 		if (size < content_length || stopDL) {
@@ -101,6 +103,7 @@ public class Downloader extends Task {
 
 		temp.renameTo(new File(filename));
 		System.out.println("Download Complete");
+		System.out.format("Into path : %s/%s\n", Paths.get(".").toAbsolutePath().normalize().toString(), filename);
 		return filename;
 	}
 
