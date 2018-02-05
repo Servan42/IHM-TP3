@@ -16,6 +16,11 @@ import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.concurrent.Task;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 
+/**
+ * Main FC class. Downloads the page.
+ * 
+ * @author BLANCH
+ */
 public class Downloader extends Task {
 	public static final int CHUNK_SIZE = 1024;
 

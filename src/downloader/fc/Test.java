@@ -3,6 +3,11 @@ package downloader.fc;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Class used to test the FC without the UI.
+ * 
+ * @author BLANCH
+ */
 public class Test extends Application {
 	public void start(Stage stage) {
 		for(String url: getParameters().getRaw()) {

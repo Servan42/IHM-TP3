@@ -14,6 +14,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Main class. Creates the user interface.
+ * 
+ * @author CHARLOT CHANET
+ */
 public class Main extends Application {
 
 	public void start(Stage stage) {

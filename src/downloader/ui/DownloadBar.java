@@ -17,6 +17,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Graphic representation of the download bar.
+ * 
+ * @author CHARLOT CHANET
+ */
 public class DownloadBar extends BorderPane {
 	private ProgressBar barre;
 	private Downloader downloader;
@@ -26,6 +31,12 @@ public class DownloadBar extends BorderPane {
 	private HBox boutons;
 	private boolean estEnPause;
 
+	/**
+	 * Creates the download bar and use the URL given as argument
+	 * to call the FC methods to begin the download. 
+	 * 
+	 * @param url URL of the page that is goind to be downloaded.
+	 */
 	public DownloadBar(String url) {
 
 		try {
@@ -80,7 +91,12 @@ public class DownloadBar extends BorderPane {
 			}
 		}).start();
 	}
-
+	
+	/**
+	 * Animates the download bar and calls the FC to start the download.
+	 * 
+	 * @param url URL of the page that is goind to be downloaded.
+	 */
 	private void download(String url) {
 
 		try {
